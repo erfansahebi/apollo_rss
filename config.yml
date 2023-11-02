@@ -1,0 +1,5 @@
+AMQP_URI: amqp://${RABBITMQ_USER}:${RABBITMQ_PASSWORD}@${RABBITMQ_HOST}:${RABBITMQ_PORT}/
+DB_URIS:
+  "rss:Base": postgresql://${DB_USER:postgres}:${DB_PASSWORD:password}@${DB_HOST:localhost}:${DB_PORT:5432}/${DB_NAME:rss}
+REDIS_URIS:
+  rss: redis://${REDIS_HOST}:${REDIS_PORT}/${REDIS_DB_NAME}
