@@ -32,8 +32,8 @@ common_models.mapper_registry.map_imperatively(RssEntity, rsses)
 
 @dataclass
 class RssUserEntity:
-    user_id: str
-    rss_id: str
+    user_id: UUID
+    rss_id: UUID
 
     id: typing.Optional[UUID] = None
     created_at: typing.Optional[datetime] = field(

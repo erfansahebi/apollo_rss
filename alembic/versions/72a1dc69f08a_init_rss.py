@@ -34,19 +34,43 @@ def upgrade() -> None:
         sa.Column(name='created_at', type_=sa.DateTime(timezone=True)),
         sa.Column(name='updated_at', type_=sa.DateTime(timezone=True)),
         sa.ForeignKeyConstraint(['rss_id'], ['rsses.id'], name=op.f(
-            'fk_rss_users_rss_id_rsses')),
-        sa.PrimaryKeyConstraint('id', name=op.f('pk_rss_users'))
+            'fk_rss_user_rss_id_rsses_id')),
+        sa.PrimaryKeyConstraint('id', name=op.f('pk_rss_user'))
     )
     op.create_table(
         'feeds',
         sa.Column(name='id', type_=sa.UUID(as_uuid=True)),
         sa.Column(name='rss_id', type_=sa.UUID(as_uuid=True), nullable=False),
+        sa.Column(name='guid', type_=sa.Text),
         sa.Column(name='data', type_=sa.JSON(), nullable=False),
         sa.Column(name='created_at', type_=sa.DateTime(timezone=True)),
         sa.Column(name='updated_at', type_=sa.DateTime(timezone=True)),
         sa.ForeignKeyConstraint(['rss_id'], ['rsses.id'], name=op.f(
-            'fk_rss_users_rss_id_rsses')),
+            'fk_feeds_rss_id_rsses_id')),
         sa.PrimaryKeyConstraint('id', name=op.f('pk_feeds'))
+    )
+    op.create_table(
+        'bookmarks',
+        sa.Column(name='id', type_=sa.UUID(as_uuid=True)),
+        sa.Column(name='user_id', type_=sa.UUID(as_uuid=True), nullable=False),
+        sa.Column(name='feed_id', type_=sa.UUID(as_uuid=True), nullable=False),
+        sa.Column(name='created_at', type_=sa.DateTime(timezone=True)),
+        sa.Column(name='updated_at', type_=sa.DateTime(timezone=True)),
+        sa.ForeignKeyConstraint(['feed_id'], ['feeds.id'], name=op.f(
+            'fk_bookmarks_rss_id_rsses_id')),
+        sa.PrimaryKeyConstraint('id', name=op.f('pk_bookmarks'))
+    )
+    op.create_table(
+        'comments',
+        sa.Column(name='id', type_=sa.UUID(as_uuid=True)),
+        sa.Column(name='user_id', type_=sa.UUID(as_uuid=True), nullable=False),
+        sa.Column(name='feed_id', type_=sa.UUID(as_uuid=True), nullable=False),
+        sa.Column(name='message', type_=sa.Text, nullable=False),
+        sa.Column(name='created_at', type_=sa.DateTime(timezone=True)),
+        sa.Column(name='updated_at', type_=sa.DateTime(timezone=True)),
+        sa.ForeignKeyConstraint(['feed_id'], ['feeds.id'], name=op.f(
+            'fk_comments_feed_id_feeds_id')),
+        sa.PrimaryKeyConstraint('id', name=op.f('pk_comments'))
     )
 
 
@@ -54,3 +78,5 @@ def downgrade() -> None:
     op.drop_table('rsses')
     op.drop_table('rss_user')
     op.drop_table('feeds')
+    op.drop_table('bookmarks')
+    op.drop_table('comments')

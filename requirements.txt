@@ -1,11 +1,12 @@
 alembic==1.12.1
 amqp==5.1.1
-apollo-shared @ git+https://github.com/erfansahebi/apollo_shared.git@4e9e4d95f216ec9a7b23c2d3f047d8688dc051d8
+apollo-shared @ git+https://github.com/erfansahebi/apollo_shared.git@96c5662ea41cb4416e27e7b9f069fa017f4239e7
 certifi==2023.7.22
 charset-normalizer==3.3.2
 click==8.1.7
 dnspython==2.4.2
 eventlet==0.33.3
+feedparser==6.0.10
 greenlet==3.0.1
 idna==3.4
 kombu==5.3.2
@@ -21,6 +22,7 @@ path.py==12.5.0
 psycopg2-binary==2.9.9
 PyYAML==6.0.1
 requests==2.31.0
+sgmllib3k==1.0.0
 six==1.16.0
 SQLAlchemy==2.0.22
 typing_extensions==4.8.0
